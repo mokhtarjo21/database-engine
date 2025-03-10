@@ -1,0 +1,25 @@
+#!/bin/bash
+if [ $# -eq 1 ] 
+then
+case "$1" in
+"who") cat /bin/usedDB
+;;
+"-h")
+ echo -h for help
+ echo who for know database used now
+ echo database name to use database
+
+;;
+*)
+if [ -d ~/.Mekhotek/$1 ];then 
+
+echo $1 > /bin/usedDB
+echo done
+else 
+echo Database not exist
+fi
+esac
+else
+echo Enter one argment ,name of database
+fi 
+

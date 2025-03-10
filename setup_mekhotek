@@ -1,0 +1,25 @@
+#!/bin/sh
+if [ $UID -eq 0 ]
+then
+
+run=0
+while [ $run -eq 0 ]
+do
+echo 1-insatall mekho batabase
+echo 2-unstall mekho database
+echo 3-Exit
+read F
+case "$F" in
+   "1") 
+   bash install
+   ;;
+   "2") bash unstall 
+   ;;
+   "3")  run=1
+   ;;
+    *) echo Enter correct option
+esac
+done
+else
+echo run as admin
+fi

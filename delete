@@ -1,0 +1,58 @@
+#!/bin/bash
+case $1 in 
+'-h')
+echo " you can use it like"
+echo " $0 from [table name ] where [condation]"
+;;
+*)
+if [ $# -eq 4 ];then
+if [ $1 = "from" ];then
+use=$(use who)
+if [ -d ~/.Mekhotek/$use ]; then
+		if [ -f ~/.Mekhotek/$use/$2 ]; then
+		
+			if [ $3 = "where" ]; then
+			
+				key=$(echo $4 | cut -d"=" -f1 )
+				val=$(echo $4 | cut -d"=" -f2 )
+				col=$(head -n 1 ~/.Mekhotek/$use/$2 | tr ':' '\n' | wc -l)
+				header=$(head -n 1 ~/.Mekhotek/$use/$2)
+				head=0
+				
+				for i in $(seq 1  $col); do
+				   colum=$(echo $header | cut -d":" -f$i )
+				 
+				   	if [ "$key" == "$colum" ];then
+				   	head=$i
+				   	fi
+				done
+				lin=$(cat ~/.Mekhotek/$use/$2 | wc -l)
+				  if [ $head -gt 0 ];then
+				 
+				  export val
+				  export head
+				  
+				  	delline  $2 
+				  	
+				  fi
+				 lin1=$(cat ~/.Mekhotek/$use/$2 | wc -l)
+				 let row=$lin-$lin1
+				 echo $row Row deleted
+			else
+				echo select condation
+			fi
+		else 
+		 
+		  echo table not exist
+		fi
+	else
+		echo Select database 
+	fi
+else
+echo syntax error
+fi
+else
+echo Enter 4 arg
+fi
+;;
+esac

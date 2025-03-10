@@ -1,0 +1,79 @@
+#!/bin/bash
+   cp create /bin
+   chmod +x /bin/create
+   
+   
+   
+    cp selectalloption /bin
+   chmod +x /bin/selectalloption
+   
+   
+   
+   sleep 0.1
+   echo ### 10%
+   
+   cp delete /bin
+   chmod +x /bin/delete
+   
+   
+   
+   sleep 0.1
+   echo '#########20%'
+   
+   cp ttaabbllee /bin
+   chmod +x /bin/ttaabbllee
+   
+   sleep 0.1
+   echo '################30%'
+   
+    cp usedDB /bin
+    chmod 777 /bin/usedDB
+   
+   sleep 0.1
+   echo '##############################40%'
+   
+   
+   cp drop /bin
+   chmod +x /bin/drop
+   
+   sleep 0.1
+   echo '##################################################50%'
+ 
+   cp insert /bin
+   chmod +x /bin/insert
+   
+   sleep 0.1
+   echo '###################################################################60%'
+   
+   cp Select /bin
+   chmod +x /bin/Select
+   
+   sleep 0.1
+   echo '####################################################################################70%'
+   
+   cp use /bin
+   chmod +x /bin/use
+   
+   sleep 0.1
+   echo '#################################################################################################80%'
+   
+   cp delline /bin
+   chmod +x /bin/delline
+   
+   sleep 0.1
+   echo '############################################################################################################90%'
+   clear
+   cp update /bin
+   chmod +x /bin/update
+   
+   sleep 0.1
+   echo '##############################################################################################################100%'
+   
+   
+   
+
+   echo install Successfully!
+ 
+  
+  
+   

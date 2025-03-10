@@ -1,0 +1,68 @@
+#! /bin/bash
+
+cols=0
+con=0
+for i in $@; do
+let con=$con+1
+	if [ $i = "from" ]; then
+		let cols=$con-1
+		
+	fi
+
+done
+let table=$cols+2
+let cond=$cols+3
+use=$(use who)
+        if [ -d ~/.Mekhotek/$use ]; then
+            if [ -f ~/.Mekhotek/$use/${@:$table:1} ]; then
+          if [ -f ~/.Mekhotek/$use/temptable ]; then
+rm ~/.Mekhotek/$use/temptable
+fi
+for arg in ${@:1:$cols}; do
+
+  col=$(head -n 1 ~/.Mekhotek/$use/${@:$table:1} | tr ':' '\n' | wc -l)
+                    header=$(head -n 1 ~/.Mekhotek/$use/${@:$table:1})
+                    head=0
+                  
+                    for i in $(seq 1 $col); do
+                        colum=$(echo $header | cut -d":" -f$i)
+                        if [ "$arg" == "$colum" ]; then
+                            head=$i
+                        fi
+                    done
+if [ $head -gt 0 ];then
+lines=$(cat ~/.Mekhotek/$use/${@:$table:1} | wc -l)
+colu=$(sed -n "p" ~/.Mekhotek/$use/${@:$table:1} | cut -d":" -f$head)
+l=0
+ if [ -f ~/.Mekhotek/$use/temptable ]; then
+for t in $colu ;do
+let l=$l+1 
+                          
+                           
+                               tlin=$(sed -n "${l}p" ~/.Mekhotek/$use/temptable)
+                               tlin=${tlin}:$t
+                               
+                                sed -i "${l}s/.*/$tlin/" ~/.Mekhotek/$use/temptable
+                                  
+				
+                  done         
+                     else
+				
+				echo $colu | tr ' ' '\n' >> ~/.Mekhotek/$use/temptable
+				
+				fi  
+     else 
+     echo syntax erorr
+     break
+     fi
+done
+if [ $head -gt 0 ]; then
+Select from temptable ${@:$cond}
+rm ~/.Mekhotek/$use/temptable
+fi
+else
+echo table not exist
+fi
+else
+echo Select Database
+fi

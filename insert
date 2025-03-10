@@ -1,0 +1,34 @@
+#!/bin/bash
+case $1 in 
+'-h')
+echo "$0 into [table name] val1:val2:...:valn"
+echo "you must insert number of values equal number of columns"
+;;
+*)
+use=$(use who)
+if [ $1 = "into" ]; then 
+	if [ -d ~/.Mekhotek/$use ]; then
+		if [ -f ~/.Mekhotek/$use/$2 ]; then
+			col=$(head -n 1 ~/.Mekhotek/$use/$2 | tr ':' '\n' | wc -l)
+			val=$(echo $3 | tr ':' '\n' | wc -l)
+			if [ $col -eq $val ]; then
+			    echo $3 >> ~/.Mekhotek/$use/$2
+			    echo insert done!
+			else
+			echo syntax error
+			fi
+		else 
+		 
+		  echo table not exist
+		fi
+	else
+		echo Select database 
+	fi
+else
+echo syntax error
+fi
+
+;;
+esac
+
+

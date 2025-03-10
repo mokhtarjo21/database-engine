@@ -1,0 +1,17 @@
+#!/bin/bash
+use=$(use who)
+
+lines=$(cat ~/.Mekhotek/$use/$1 | wc -l)				  	
+for l in $(seq 2 $lines) ; do				  	
+colu=$(sed -n "${l}p" ~/.Mekhotek/$use/$1 | cut -d":" -f$head )				  	
+if [ "$colu"  == "$val" ];then
+			   	
+sed -i "${l}d" ~/.Mekhotek/$use/$1
+
+delline $1
+
+fi
+
+done
+
+

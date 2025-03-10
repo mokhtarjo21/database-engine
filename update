@@ -1,0 +1,68 @@
+#!/bin/bash
+case $1 in 
+'-h')
+echo -e "$0 [table name] set [column_name=new value] where [condation like 'column_name=nvalue']"
+;;
+*)
+if [ $# -eq 5 ]; then
+    if [ $2 = "set" ]; then
+        use=$(use who)
+        if [ -d ~/.Mekhotek/$use ]; then
+            if [ -f ~/.Mekhotek/$use/$1 ]; then
+                if [ $4 = "where" ]; then
+                    nkey=$(echo $3 | cut -d"=" -f1)
+                    nval=$(echo $3 | cut -d"=" -f2)
+                    key=$(echo $5 | cut -d"=" -f1)
+                    val=$(echo $5 | cut -d"=" -f2)
+                    col=$(head -n 1 ~/.Mekhotek/$use/$1 | tr ':' '\n' | wc -l)
+                    header=$(head -n 1 ~/.Mekhotek/$use/$1)
+                    head=0
+                    nhead=0
+                    for i in $(seq 1 $col); do
+                        colum=$(echo $header | cut -d":" -f$i)
+                        if [ "$key" == "$colum" ]; then
+                            head=$i
+                        fi
+                    done
+                    for i in $(seq 1 $col); do
+                        colum=$(echo $header | cut -d":" -f$i)
+                        if [ "$nkey" == "$colum" ]; then
+                            nhead=$i
+                        fi
+                    done
+                    if [ $head -gt 0 ] && [ $nhead -gt 0 ]; then
+                        lines=$(cat ~/.Mekhotek/$use/$1 | wc -l)
+                        for l in $(seq 2 $lines); do
+                            colu=$(sed -n "${l}p" ~/.Mekhotek/$use/$1 | cut -d":" -f$head)
+                            if [ "$colu" == "$val" ]; then
+                                lin=$(sed -n "${l}p" ~/.Mekhotek/$use/$1)
+                                for m in $(seq 1 $col); do
+                                    if [ $m -eq $nhead ]; then
+                                        echo $nval >> uptemp
+                                    else
+                                        echo $lin | cut -d":" -f$m >> uptemp
+                                    fi
+                                done
+                                newval=$(cat uptemp | tr '\n' ':')
+                                sed -i "${l}s/.*/$newval/" ~/.Mekhotek/$use/$1
+                                rm uptemp
+                            fi
+                        done
+                    fi
+                else
+                    echo "select condition"
+                fi
+            else
+                echo "table not exist"
+            fi
+        else
+            echo "Select database"
+        fi
+    else
+        echo "syntax error"
+    fi
+else
+    echo "syntax error"
+fi
+;;
+esac

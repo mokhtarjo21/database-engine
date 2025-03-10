@@ -1,0 +1,38 @@
+#!/bin/bash
+#this script use to create database or table
+if [ $# -lt 3 ]
+ then
+	case "$1" in
+   "database")
+   if [ -d ~/.Mekhotek ]; then
+		if [ -d ~/.Mekhotek/$2 ]; then
+			echo database aleady exist
+		else 
+		   mkdir ~/.Mekhotek/$2 &> /dev/null
+		  echo database created
+		fi
+	else
+		mkdir ~/.Mekhotek &> /dev/null
+		mkdir ~/.Mekhotek/$2 &> /dev/null
+		echo database created
+	fi
+
+   ;;
+   "table") 
+	bash ttaabbllee $2
+   ;;
+   "-h") echo create [arg] [arg] 
+   echo must take 2 arg 
+    echo	 first arg is:
+	echo 	database 	to create database in path ~/.Mekhote/
+	echo 	table  		to create table in database you must use database before create table
+	echo    -h		to show how use create
+	echo 	second arg	take name of database or table
+	
+   ;;
+  *)	echo Command \'$1\' not found ,create take one or two arg
+esac
+else
+ echo Enter 2 var
+fi
+

@@ -1,0 +1,40 @@
+#!/bin/bash
+case $1 in
+'-h')
+echo "$0 [arg] [arg name]"
+echo "$0 database [name of database] for drop database"
+echo "$0 table [name of table] for drop table"
+;;
+*)
+if [ $# -eq 2 ]
+ then
+	case "$1" in
+   "database")
+	if [ -d ~/.Mekhotek/$2 ]; then
+		rm -r ~/.Mekhotek/$2
+			echo Database Deleted
+		else 
+		  echo Database Not exist
+		fi
+	
+   ;;
+   "table") 
+   use=$(use who)
+	if [ -d ~/.Mekhotek/$use ]; then
+		if [ -f ~/.Mekhotek/$use/$1 ]; then
+			rm ~/.Mekhotek/$use/$1
+			echo table Deleted
+		else 
+		  echo table not exist
+		fi
+	else
+		echo Select database 
+	fi
+     ;;
+  *)	echo Command \'$1\' not found ,drop take one or two arg
+esac
+else
+ echo Enter 2 var
+fi
+;;
+esac

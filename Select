@@ -1,0 +1,71 @@
+#!/bin/bash
+case $1 in 
+'-h')
+echo -e "for select all columns and all rows \n use \"$0 from [table name\"]"
+echo  -e "for select all columns  with condation \n use \"$0 from [table name] where [condation]\" this take only one  condation"
+echo -e "for select one or more columns  with condation \n use \"$0 [col name....] from [table name] where [condation]\" this take only one  condation "
+echo -e "for select one or more columns  and all rows \n use \"$0 [col name....] from [table name] \""
+;;
+*)
+if [ $1 = "from" ]; then
+use=$(use who)
+if [ -d ~/.Mekhotek/$use ]; then
+
+		if [ -f ~/.Mekhotek/$use/$2 ]; then
+		
+			if [ "$3" == "where" ]; then
+		
+				key=$(echo $4 | cut -d"=" -f1 )
+				val=$(echo $4 | cut -d"=" -f2 )
+				col=$(head -n 1 ~/.Mekhotek/$use/$2 | tr ':' '\n' | wc -l)
+				header=$(head -n 1 ~/.Mekhotek/$use/$2)
+				head=0
+				
+				for i in $(seq 1  $col); do
+				   colum=$(echo $header | cut -d":" -f$i )
+				 
+				   	if [ "$key" == "$colum" ];then
+				   	head=$i
+				   	fi
+				done
+				echo $(head -n 1 ~/.Mekhotek/$use/$2 | tr ':' '    ')
+				echo '-----------------------------------'
+				  if [ $head -gt 0 ];then
+				  	lines=$(cat ~/.Mekhotek/$use/$2 | wc -l)
+				  	
+				  	for l in $(seq 2  $lines) ; do
+				  	colu=$(sed -n "${l}p" ~/.Mekhotek/$use/$2 | cut -d":" -f$head )
+				  	
+				   	if [ "$colu"  == "$val" ];then
+				   	
+				   	echo $(sed -n "${l}p" ~/.Mekhotek/$use/$2 | tr ':' '   ')
+				   
+				   	fi
+				  done
+				  fi
+				 
+			else
+				echo $(head -n 1 ~/.Mekhotek/$use/$2 | tr ':' '    ')
+					echo '-----------------------------------'
+				  
+				  	lines=$(cat ~/.Mekhotek/$use/$2 | wc -l)
+				  	
+				  	for l in $(seq 2  $lines) ; do
+				  	
+				  	
+				   	
+				   	echo $(sed -n "${l}p" ~/.Mekhotek/$use/$2 | tr ':' '   ')
+				  	 done
+			fi
+		else 
+		 
+		  echo table not exist
+		fi
+	else
+		echo Select database 
+	fi
+else
+selectalloption $@
+fi
+;;
+esac
