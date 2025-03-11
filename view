@@ -4,6 +4,7 @@ if [ $# -eq 1 ]; then
 case $1 in
 "tables")
 	if [ -d ~/.Mekhotek/$use ]; then
+		echo '-------------tables--------------'
 		ls ~/.Mekhotek/$use
 	else
 		echo Select database 
@@ -11,6 +12,7 @@ case $1 in
 ;;
 "database")
 	if [ -d ~/.Mekhotek/ ]; then
+		echo '-------------databases--------------'
 		ls ~/.Mekhotek/
 	else
 		echo you must create database at first  
