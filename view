@@ -1,6 +1,6 @@
 #! /bin/bash
 use=$(use who)
-if [ $# -eq 2 ]; then
+if [ $# -eq 1 ]; then
 case $1 in
 "tables")
 	if [ -d ~/.Mekhotek/$use ]; then
@@ -17,14 +17,18 @@ case $1 in
 	fi
 	;;
 "-h")
-	echo -e '$0 tables    for view tables in selected database'
-	echo -e '$0 database    for view databases'
+	echo -e 'view tables    for view tables in selected database'
+	echo -e 'view database    for view databases'
 	;;
 *)
 	echo 'syntax error'
-	echo -e '$0 tables    for view tables in selected database'
-	echo -e '$0 database    for view databases'
+	echo -e 'view tables    for view tables in selected database'
+	echo -e 'view database    for view databases'
+	;;
+	esac
 else 
 	echo 'syntax error'
-	echo -e '$0 tables    for view tables in selected database'
-	echo -e '$0 database    for view databases'
+	echo -e 'view tables    for view tables in selected database'
+	echo -e 'view database    for view databases'
+fi
+

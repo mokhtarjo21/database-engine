@@ -7,8 +7,9 @@
     cp selectalloption /bin
    chmod +x /bin/selectalloption
    
+   cp view /bin
    
-   
+   chmod +x /bin/view
    sleep 0.1
    echo ### 10%
    
